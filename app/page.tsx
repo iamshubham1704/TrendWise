@@ -87,11 +87,6 @@ export default function Home() {
           </button>
         </form>
       </section>
-
-      {/* Footer */}
-      <footer className="py-8 text-center text-gray-500 border-t border-gray-800">
-        &copy; 2025 TrendWise. All rights reserved.
-      </footer>
     </main>
   );
 }
