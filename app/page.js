@@ -11,36 +11,35 @@ export default function Home() {
     async function fetchArticles() {
       const res = await fetch("/api/all-articles");
       const json = await res.json();
-      console.log("Fetched data:", json);
       setData(json.categories || []);
     }
     fetchArticles();
   }, []);
 
   return (
-    <main className="bg-black text-white min-h-screen p-20">
-      <h1 className="text-6xl font-extrabold text-center mb-6 tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">
+    <main className="bg-black text-white min-h-screen px-4 py-20 sm:px-10 md:px-20">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600">
         TrendWise
       </h1>
 
       {session && (
-        <p className="text-center mb-14 text-lg text-gray-300">
+        <p className="text-center mb-10 text-base sm:text-lg text-gray-300">
           Welcome <span className="font-bold text-cyan-400">{session.user.name}</span>! 
-          Ready to explore the treding Market Articles
+          Ready to explore the trending Market Articles
         </p>
       )}
 
       {data.map((category, idx) => (
-        <section key={idx} className="mb-20">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 pl-4 border-cyan-500">
+        <section key={idx} className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 border-l-4 pl-4 border-cyan-500">
             {category.category}
           </h2>
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {category.articles.map((article, aidx) => (
               <div
                 key={aidx}
-                className="group bg-gray-900 rounded-2xl overflow-hidden shadow-md hover:shadow-cyan-500/50 transform hover:scale-105 transition duration-300"
+                className="group bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-cyan-500/50 transform hover:scale-[1.02] transition duration-300"
               >
                 <Link href={`/article/${article.slug}`}>
                   <img
@@ -49,13 +48,13 @@ export default function Home() {
                       || `https://source.unsplash.com/400x300?${encodeURIComponent(category.category || "technology")}`
                     }
                     alt={article.title}
-                    className="w-full h-56 object-cover group-hover:opacity-80 transition"
+                    className="w-full h-48 sm:h-56 object-cover group-hover:opacity-80 transition"
                   />
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition">
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-cyan-400 transition">
                       {article.title}
                     </h3>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-sm sm:text-base">
                       {article.meta?.description || article.excerpt}
                     </p>
                   </div>
@@ -79,7 +78,6 @@ export default function Home() {
   );
 }
 
-/* Comments Component */
 function Comments({ slug, user }) {
   const [comments, setComments] = useState([]);
   const [input, setInput] = useState("");
@@ -123,11 +121,11 @@ function Comments({ slug, user }) {
           placeholder="Add a comment..."
           value={input}
           onChange={e => setInput(e.target.value)}
-          className="flex-1 px-4 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          className="flex-1 px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm"
         />
         <button
           onClick={handlePost}
-          className="px-4 py-2 rounded bg-cyan-600 hover:bg-cyan-700 text-black font-semibold"
+          className="px-4 py-2 rounded bg-cyan-600 hover:bg-cyan-700 text-black font-semibold text-sm"
         >
           Post
         </button>
